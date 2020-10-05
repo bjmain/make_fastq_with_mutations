@@ -17,13 +17,19 @@ for line in open(sys.argv[1]):
 contig_list = {}
 for pep in D:
     seq = D[pep]
+        name = "".join([">",pep,"|","pos:NA","|","-".join(["NA","NA"])])
+    print(name)
+    print(seq)
+    print("+")
+    fake_quality = "J" * int(len(seq))
+    print(fake_quality)   # We may want to be more sophisticated with this later.
     for base in range(len(seq)):
         bases = ["A", "T", "C", "G"]
         bases.remove(seq[base])  
         seq = list(seq)
         fake_mutation = bases[0] 
         
-        name = "".join([">",pep,"_","pos:",str(base+1),",","_".join([seq[base],fake_mutation])])
+        name = "".join([">",pep,"|","pos:",str(base+1),"|","-".join([seq[base],fake_mutation])])
         print(name)
         
         seq[base] = fake_mutation
